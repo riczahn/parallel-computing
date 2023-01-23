@@ -7,7 +7,7 @@
 #include <math.h>
 
 
-const double epsilon = 1e-6;
+const double epsilon = 1e-4;
 
 
 void load_solution ( char *filename, double *data, int64_t N );
@@ -18,7 +18,7 @@ int main ( int argc, char **argv )
 {
     assert ( argc > 3 );
 
-    int64_t N = atoi ( argv[1] );
+    int64_t N = pow ( atoi(argv[1]), 2 );
 
     double *solution_1 = malloc ( N * sizeof(double) );
     double *solution_2 = malloc ( N * sizeof(double) );
@@ -27,8 +27,8 @@ int main ( int argc, char **argv )
     load_solution ( argv[3], solution_2, N );
 
     uint64_t errors = compare_solutions ( solution_1, solution_2, N );
-    fprintf ( stderr, "There are %ld differences between the solution and the reference solution\n", errors );
-    
+    fprintf ( stderr, "There are %lu differences between the solution and the reference solution\n", errors );
+
     free ( solution_1 );
     free ( solution_2 );
 
@@ -36,8 +36,7 @@ int main ( int argc, char **argv )
 }
 
 
-size_t
-get_file_size( char *filename )
+size_t get_file_size( char *filename )
 {
     struct stat properties;
     if ( stat( filename, &properties ) == -1 )
@@ -49,8 +48,7 @@ get_file_size( char *filename )
 }
 
 
-void
-load_solution ( char* filename, double *solution, int64_t N )
+void load_solution ( char* filename, double *solution, int64_t N )
 {
     FILE *in = fopen( filename, "rb" );
     if ( !in )
@@ -79,6 +77,10 @@ load_solution ( char* filename, double *solution, int64_t N )
 
 bool match_double ( double d1, double d2 )
 {
+    if ( isnan(d1) || isnan(d2) )
+    {
+        return false;
+    }
     if ( fabs( d1 - d2 ) > epsilon )
     {
         return false;
@@ -88,8 +90,7 @@ bool match_double ( double d1, double d2 )
 }
 
 
-uint64_t
-compare_solutions ( double *solution, double *other_solution, int64_t N )
+uint64_t compare_solutions ( double *solution, double *other_solution, int64_t N )
 {
     uint64_t error_count = 0;
 

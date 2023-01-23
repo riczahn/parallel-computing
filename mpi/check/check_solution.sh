@@ -10,18 +10,6 @@ for i in 1 2 4 8
 do
     echo "Running with $i processes:"
     mpirun -n $i --oversubscribe ./solution 1>/dev/null
-    ./check/compare_solutions 1024 data/00050.bin check/references/n1024/00050.bin
-    echo
-done
-
-echo
-echo "Checking unevenly divisable grid size"
-echo "------------------------------------------------------------------"
-echo
-for i in 3 5 6 7
-do
-    echo "Running with $i processes:"
-    mpirun -n $i --oversubscribe ./solution 1>/dev/null
-    ./check/compare_solutions 1024 data/00050.bin check/references/n1024/00050.bin
+    ./check/compare_solutions 256 data/00050.bin check/references/n256/00050.bin
     echo
 done

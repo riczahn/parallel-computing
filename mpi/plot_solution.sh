@@ -1,27 +1,27 @@
 help()
 {
     echo
-    echo "Plot 1D shallow water equations" 
+    echo "Plot 2D shallow water equations"
     echo
     echo "Syntax"
     echo "---------------------------------------------"
     echo "./plot_solution.sh [-n|h]                    "
-    echo 
+    echo
     echo "Option    Description     Arguments   Default"
     echo "---------------------------------------------"
-    echo "n         Grid size       Optional    1024   "
+    echo "n         Grid size       Optional    256    "
     echo "h         Help            None               "
     echo
     echo "Example"
     echo "---------------------------------------------"
-    echo "./plot_solution.sh -n 1024                   "
-    echo 
+    echo "./plot_solution.sh -n 256                    "
+    echo
 }
 
 #-----------------------------------------------------------------
 set -e
 
-N=1024
+N=256
 
 while getopts ":n:h" opt; do
     case $opt in
@@ -46,9 +46,10 @@ OUTFILE=`echo $FILE | sed s/^data/plots/ |  sed s/\.bin/.png/`
 cat <<END_OF_SCRIPT | gnuplot -
 set term png
 set output "$OUTFILE"
-set xrange [0:$SIZE]
-set yrange [0:1]
-plot "$FILE" binary format='%double' using 0:1
+set zrange [0.9:1.1]
+set cbrange [0.95:1.0]
+set palette defined (0 "grey", 1 "blue", 2 "white")
+splot "$FILE" binary array=${SIZE}x${SIZE} format='%double' with pm3d
 END_OF_SCRIPT
 echo $OUTFILE
 done

@@ -24,7 +24,7 @@ run: purge compile
 	mpirun -np 4 ./solution
 
 check: purge compile
-	gcc ./check/compare_solutions.c -o ./check/compare_solutions
+	gcc ./check/compare_solutions.c -lm -o ./check/compare_solutions
 	./check/check_solution.sh
 
 plot: purge run

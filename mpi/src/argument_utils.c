@@ -7,16 +7,11 @@
 #include "../inc/argument_utils.h"
 
 
-OPTIONS
-*parse_args ( int argc, char **argv )
+OPTIONS *parse_args ( int argc, char **argv )
 {
-    /*
-     * Argument parsing: don't change this!
-     */
-
-    int_t N = 1024;
-    int_t max_iteration = 100000;
-    int_t snapshot_frequency = 1000;
+    int_t N = 256;
+    int_t max_iteration = 5000;
+    int_t snapshot_frequency = 40;
 
     static struct option const long_options[] =  {
         {"help",               no_argument,       0, 'h'},
@@ -87,8 +82,7 @@ OPTIONS
 }
 
 
-void
-help ( char const *exec, char const opt, char const *optarg )
+void help ( char const *exec, char const opt, char const *optarg )
 {
     FILE *out = stdout;
     
