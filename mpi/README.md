@@ -13,22 +13,21 @@ Creates folders `data`, `plots` and `video`.
 
 Compiles the code for comparing solutions.
 
-### Parallel solution
 **Compile**
 
-`make parallel`
+`make compile`
 
 **Run**
 
-`mpirun -np [number of MPI processes] [--oversubscribe] ./parallel -n [grid_size] -i [max_iteration] -s [snapshot_frequency]`
+`mpirun -np [number of MPI processes] [--oversubscribe] ./solution -n [grid_size] -i [max_iteration] -s [snapshot_frequency]`
 
 **!** MPI will complain that there are "not enough slots available" if you try to run with more processes than there are available processors. Passing the `--oversubscribe` option to `mpirun` will circumvent this.
 
 **Example**  
 
 ```
-make parallel
-mpirun -np 4 ./parallel -n 1024 -i 100000 -s 1000
+make compile
+mpirun -np 4 ./solution -n 256 -i 5000 -s 40
 ```
 
 **Compile and Run**
@@ -45,7 +44,7 @@ Alternatively, you can compile, run, and plot the solution with default values w
 
 **Example**
 
-`./plot_solution.sh -n 1024`
+`./plot_solution.sh -n 256`
 
 ### Video
 `make show`
@@ -59,10 +58,10 @@ Compiles and runs the parallel solution with default values and compares the out
 
 ## Options
 Option | Description | Restrictions | Default value
-:------------ | :------------ | :------------ | :------------ 
-**-n** | Number of grid points in one spatial dimension | > 0 | 1024
-**-i** | Number of iterations | > 0 | 100000
-**-s** | Number of iterations between each time the grid state is saved to file | > 0 | 1000
+:------------ | :------------ | :------------ | :------------
+**-n** | Number of grid points in one spatial dimension | > 0 | 256
+**-i** | Number of iterations | > 0 | 5000
+**-s** | Number of iterations between each time the grid state is saved to file | > 0 | 40
 **-np**| Number of processes (MPI option) | > 0 | 4
 
 ## Installing dependencies
