@@ -1,5 +1,4 @@
 # Finite difference approximation of the 1D shallow water equations using MPI
-This is the result of a former assignment of the course TDT4200 at the Norwegian University of Science and Technology.
 In this assignment a serial implementation of the Finite Difference Method (FDM) for solving the 1D shallow water equations was taken and transformed into a distributed version using the Message Passing Interface (MPI).
 
 ## Run

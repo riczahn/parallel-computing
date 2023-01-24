@@ -1,6 +1,5 @@
 # Finite difference approximation of the 2D shallow water equations using CUDA
-In this assignment you will work on an implementation of the Finite Difference Method (FDM) for solving the 2D shallow water equations using the CUDA API for NVIDIA GPUs. Information on parallelization with CUDA is described in the lecture slides.
-
+In this assignment a serial implementation of the Finite Difference Method (FDM) for solving the 1D shallow water equations was taken and transformed into a distributed version using the CUDA API for NVIDIA GPUs.
 
 ## Run
 ### Setup
